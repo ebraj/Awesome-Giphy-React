@@ -1,32 +1,3 @@
-// All about the mixins
-@mixin flex-container($direction,$align,$justify,$wrap){
-    display: flex;
-    flex-wrap: $wrap;
-    flex-direction: $direction;
-    align-items: $align;
-    justify-content: $justify;
-}
-@mixin button-component($bg-color,$text-color){
-    background-color : $bg-color;
-    color : $text-color;
-}
-@mixin container-width($cont-width){
-    width: 100%;
-    max-width: $cont-width;
-    margin: 0 auto;
-    padding: 0px 20px;
-}
-
-// Different Classes
-.container-1000{
-    @include container-width(1000px);
-}
-.container-1200{
-    @include container-width(1200px);
-}
-.container-1400{
-    @include container-width(1400px);
-}
 
 // Stuffs related to the fluid typography from the CSS tricks
 @function strip-unit($value) {
@@ -53,3 +24,18 @@
       }
     }
   }
+
+// All about the mixins
+@mixin flex-container($direction,$align,$justify,$wrap){
+    display: flex;
+    flex-wrap: $wrap;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+}
+@mixin container-width($cont-width){
+    width: 100%;
+    max-width: $cont-width;
+    margin: 0 auto;
+    padding: 0px 20px;
+}
