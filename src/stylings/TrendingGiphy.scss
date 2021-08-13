@@ -1,11 +1,31 @@
 .giphy {
   text-align: center;
 
-  #{&}__title {
-  }
-
   #{&}__container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 15px;
+
+    &-el {
+      position: relative;
+      &:hover {
+        transform: scale(1.15);
+        transition: all 0.5s ease;
+        z-index: 10;
+        &::before {
+          background-color: transparent;
+        }
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+      }
+    }
   }
 }

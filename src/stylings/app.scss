@@ -1,3 +1,4 @@
+@import "./Header.scss";
 @import "./TrendingGiphy.scss";
 body {
   background-color: $primary-dark;
@@ -7,7 +8,12 @@ h2,
 h3,
 h4,
 h5,
-h6,
-p {
+h6 {
   color: $primary-white;
+  font-weight: 900;
+}
+p {
+  color: $primary-gray;
+  font-weight: 700;
+  font-size: 1.2rem;
 }

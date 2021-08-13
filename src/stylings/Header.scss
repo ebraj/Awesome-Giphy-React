@@ -1,0 +1,8 @@
+.giphy__header {
+  @include flex-container(row, center, space-between, nowrap);
+  padding: 20px 0;
+  #{&}--title {
+  }
+  #{&}--intro {
+  }
+}
