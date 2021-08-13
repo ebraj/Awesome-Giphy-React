@@ -1,0 +1,11 @@
+.giphy {
+  text-align: center;
+
+  #{&}__title {
+  }
+
+  #{&}__container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
