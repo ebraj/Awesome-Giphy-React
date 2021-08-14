@@ -9,7 +9,7 @@
     &-el {
       position: relative;
       &:hover {
-        transform: scale(1.15);
+        // transform: scale(1.15);
         transition: all 0.5s ease;
         z-index: 10;
         &::before {

@@ -15,21 +15,16 @@ const TrendingGiphy = () => {
   // Populating with the trending giphys
   useEffect(() => {
     const fetchGiphy = async () => {
-      setIsError(false);
       setIsLoading(true);
       // Handling the Error Properly
-      try {
-        const results = await axios("https://api.giphy.com/v1/gifs/trending", {
-          params: {
-            api_key: "r4dAgR1xaCizzOLRhF8JHJwjbk6WrWhw",
-          },
-        });
-        setDatas(results.data.data);
-        setIsLoading(false);
-      } catch (err) {
-        setIsError(true);
-        console.log(err);
-      }
+      const results = await axios("https://api.giphy.com/v1/gifs/trending", {
+        params: {
+          api_key: "r4dAgR1xaCizzOLRhF8JHJwjbk6WrWhw",
+          limit: 25,
+        },
+      });
+      setDatas(results.data.data);
+      setIsLoading(false);
     };
     fetchGiphy();
   }, []);
@@ -59,10 +54,39 @@ const TrendingGiphy = () => {
     setSearch(e.target.value);
   };
 
+  // Handling the submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsError(false);
+    setIsLoading(true);
+    // Handling the Error Properly
+    try {
+      const results = await axios("https://api.giphy.com/v1/gifs/search", {
+        params: {
+          api_key: "r4dAgR1xaCizzOLRhF8JHJwjbk6WrWhw",
+          q: search,
+          limit: 25,
+        },
+      });
+      setSearch("");
+      if (results.data.data.length !== 0) {
+        setDatas(results.data.data);
+        setIsLoading(false);
+      } else {
+        setIsLoading(false);
+        setIsError(true);
+      }
+      // console.log(results);
+      // setIsLoading(false);
+    } catch (err) {
+      setIsError(true);
+      console.log("Error");
+    }
+  };
   return (
     <div className="giphy container-1200">
       <Header />
-      <form className="giphy__form">
+      <form className="giphy__form" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="@Search the Giphy"
@@ -74,7 +98,15 @@ const TrendingGiphy = () => {
           <BiSearch />
         </button>
       </form>
-      <div className="giphy__container">{renderedGiphys()}</div>
+      <div className="giphy__container">
+        {isError ? (
+          <div>
+            <p>Err</p>
+          </div>
+        ) : (
+          renderedGiphys()
+        )}
+      </div>
     </div>
   );
 };
