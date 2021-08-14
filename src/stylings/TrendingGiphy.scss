@@ -29,3 +29,36 @@
     }
   }
 }
+
+.giphy__form {
+  padding: 15px 0;
+  @include flex-container(row, center, space-between, nowrap);
+  gap: 10px;
+  #{&}--input {
+    padding: 15px;
+    outline: none;
+    border: transparent;
+    flex-grow: 1;
+    border-radius: 2.5px;
+  }
+  #{&}--submit {
+    padding: 14.5px;
+    border: transparent;
+    outline: none;
+    background-color: #ff9e99;
+    background-color: #ffbb99;
+    background-color: #ff99f1;
+    background-image: radial-gradient(
+        at 5% 32%,
+        hsla(31, 97%, 68%, 1) 0,
+        transparent 44%
+      ),
+      radial-gradient(at 21% 77%, hsla(138, 92%, 61%, 1) 0, transparent 57%),
+      radial-gradient(at 22% 73%, hsla(202, 78%, 64%, 1) 0, transparent 40%),
+      radial-gradient(at 54% 61%, hsla(137, 72%, 76%, 1) 0, transparent 58%),
+      radial-gradient(at 0% 72%, hsla(80, 88%, 68%, 1) 0, transparent 50%),
+      radial-gradient(at 99% 97%, hsla(168, 84%, 62%, 1) 0, transparent 59%),
+      radial-gradient(at 91% 59%, hsla(186, 85%, 64%, 1) 0, transparent 54%);
+    color: $primary-dark;
+  }
+}
