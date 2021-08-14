@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // Importing the axios
 import axios from "axios";
 import Header from "./Header";
+import Pagination from "./Pagination";
 import { v4 as uuidv4 } from "uuid";
 import { BiSearch } from "react-icons/bi";
 
@@ -12,6 +13,14 @@ const TrendingGiphy = () => {
   const [isError, setIsError] = useState(false);
   const [search, setSearch] = useState("");
   const [datas, setDatas] = useState([]);
+
+  // Regarding the pagiantion feature
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = datas.slice(indexOfFirstItem, indexOfLastItem);
+
   // Populating with the trending giphys
   useEffect(() => {
     const fetchGiphy = async () => {
@@ -20,7 +29,7 @@ const TrendingGiphy = () => {
       const results = await axios("https://api.giphy.com/v1/gifs/trending", {
         params: {
           api_key: "r4dAgR1xaCizzOLRhF8JHJwjbk6WrWhw",
-          limit: 25,
+          limit: 50,
         },
       });
       setDatas(results.data.data);
@@ -38,7 +47,7 @@ const TrendingGiphy = () => {
         </div>
       );
     }
-    return datas.map((el) => {
+    return currentItems.map((el) => {
       return (
         <div key={uuidv4()} className="giphy__container-el">
           <img
@@ -65,7 +74,7 @@ const TrendingGiphy = () => {
         params: {
           api_key: "r4dAgR1xaCizzOLRhF8JHJwjbk6WrWhw",
           q: search,
-          limit: 25,
+          limit: 50,
         },
       });
       setSearch("");
@@ -83,6 +92,12 @@ const TrendingGiphy = () => {
       console.log("Error");
     }
   };
+
+  // Creating the pagination handler function
+  const pageSelectionHandler = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="giphy container-1200">
       <Header />
@@ -98,6 +113,14 @@ const TrendingGiphy = () => {
           <BiSearch />
         </button>
       </form>
+      <div className="giphy__pagination">
+        <Pagination
+          pageSelectionHandler={pageSelectionHandler}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          totalItems={datas.length}
+        />
+      </div>
       <div className="giphy__container">
         {isError ? (
           <div>

@@ -1,5 +1,6 @@
 @import "./Header.scss";
 @import "./TrendingGiphy.scss";
+@import "./Pagination.scss";
 body {
   background-color: $primary-dark;
 }
@@ -12,7 +13,8 @@ h6 {
   color: $primary-white;
   font-weight: 900;
 }
-p {
+p,
+li {
   color: $primary-gray;
   font-weight: 700;
   font-size: 1.2rem;
